@@ -1,0 +1,66 @@
+version: '2.38.2'
+
+services:
+  nginx:
+    container_name: nginx
+    hostname: nginx_host
+    image: nginx:riad
+    build: ./requirements/nginx/.
+    ports:
+      - "443:443"
+    networks:
+      - webnet
+    volumes:
+      - wordpress_data:/var/www/html
+    restart: always
+    depends_on:
+      - wordpress
+  wordpress:
+    container_name: wordpress
+    hostname: wordpress_host
+    image: wordpress:riad
+    build: ./requirements/wordpress/.
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    networks:
+      - webnet
+    ports:
+      - "9000"
+    volumes:
+      - wordpress_data:/var/www/html
+    restart: always
+  mariadb:
+    container_name: mariadb
+    hostname: mariadb_host
+    image: mariadb:riad
+    build: ./requirements/mariadb/.
+    env_file:
+      - .env
+    networks:
+      - webnet 
+    ports:
+      - "3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    restart: always
+  
+
+networks:
+  webnet:
+      name: net_bridge
+
+volumes:
+  mariadb_data:
+    name: mariadb
+    driver_opts:
+      type: none
+      device: /home/${USER}/data/mariadb
+      o: bind
+  wordpress_data:
+    name: wordpress
+    driver_opts:
+      type: none
+      device: /home/${USER}/data/wordpress
+      o: bind
