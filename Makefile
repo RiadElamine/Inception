@@ -1,16 +1,19 @@
 all: build
 
+USERNAME := $(shell logname)
+
 build:
 	mkdir -p /home/${USER}/data/mariadb
 	mkdir -p /home/${USER}/data/wordpress
 	cd srcs && docker compose up --build
+	USERNAME=${USER};
 
 clean:
 	cd srcs && docker compose down --volumes --rmi all
 	docker container prune -f
 	docker image prune -af
 	docker volume prune -f
-	rm -rf /home/${USER}/data
+	rm -rf /home/$(USERNAME)/data
 
 re: clean all
 
