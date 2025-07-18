@@ -6,7 +6,6 @@ build:
 	mkdir -p /home/${USER}/data/mariadb
 	mkdir -p /home/${USER}/data/wordpress
 	cd srcs && docker compose up --build
-	USERNAME=${USER};
 
 clean:
 	cd srcs && docker compose down --volumes --rmi all
