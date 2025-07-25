@@ -45,6 +45,18 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
     restart: always
+  adminer:
+    container_name: adminer
+    hostname: adminer_host
+    image: adminer:riad
+    build: ./requirements/adminer/.
+    networks:
+      - webnet
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - mariadb
   
 
 networks:

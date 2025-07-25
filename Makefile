@@ -3,8 +3,8 @@ all: build
 USERNAME := $(shell logname)
 
 build:
-	mkdir -p /home/${USER}/data/mariadb
-	mkdir -p /home/${USER}/data/wordpress
+	mkdir -p /home/${USERNAME}/data/mariadb
+	mkdir -p /home/${USERNAME}/data/wordpress
 	cd srcs && docker compose up --build
 
 clean:
