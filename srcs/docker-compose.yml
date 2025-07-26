@@ -57,6 +57,16 @@ services:
     restart: always
     depends_on:
       - mariadb
+  my_website:
+    container_name: my_website
+    hostname: my_website_host
+    image:  my_website:riad
+    build: ./requirements/my_website/.
+    networks:
+      - webnet
+    ports:
+      - "80:80"
+    restart: always
   
 
 networks:

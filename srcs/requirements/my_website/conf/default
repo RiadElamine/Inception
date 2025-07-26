@@ -1,0 +1,13 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name relamine.42.fr;
+
+        root /var/www/html;
+        location \
+        {
+        try_files $uri =404;
+        index index.html;
+        }
+}
