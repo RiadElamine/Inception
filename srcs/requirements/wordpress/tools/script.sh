@@ -21,10 +21,16 @@ wp core install \
   --title=${title} \
   --admin_user=${admin_user} \
   --admin_password=${admin_pwd} \
-    --admin_email=${admin_email} \
+  --admin_email=${admin_email} \
   --allow-root
 wp user create "${wp_user}" "${wp_email}" --user_pass="${wp_pwd}" --role=author --allow-root
 
 sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
+
+wp plugin install redis-cache --activate --allow-root
+wp config set WP_REDIS_HOST redis --allow-root
+wp config set WP_REDIS_PORT 6379 --raw --allow-root
+wp config set WP_CACHE true --raw --allow-root
+wp redis enable --allow-root
 
 /usr/sbin/php-fpm7.4 -F

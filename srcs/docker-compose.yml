@@ -1,4 +1,3 @@
-version: '2.38.2'
 
 services:
   nginx:
@@ -67,6 +66,19 @@ services:
     ports:
       - "80:80"
     restart: always
+  redis:
+    container_name: redis
+    hostname: redis_host
+    image: redis:riad
+    build: ./requirements/redis/.
+    networks:
+      - webnet
+    ports:
+      - "6379"
+    depends_on:
+      - wordpress
+    restart: always
+  
   
 
 networks:
