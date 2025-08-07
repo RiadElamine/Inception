@@ -5,14 +5,15 @@ USERNAME := $(shell logname)
 build:
 	mkdir -p /home/${USERNAME}/data/mariadb
 	mkdir -p /home/${USERNAME}/data/wordpress
-	cd srcs && docker compose up --build
+	mkdir -p /home/${USERNAME}/data/portainer
+	cd srcs && docker compose up -d --build
 
 clean:
 	cd srcs && docker compose down --volumes --rmi all
 	docker container prune -f
 	docker image prune -af
 	docker volume prune -f
-	rm -rf /home/$(USERNAME)/data
+	sudo rm -rf /home/$(USERNAME)/data
 
 re: clean all
 
