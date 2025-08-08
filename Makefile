@@ -15,6 +15,9 @@ clean:
 	docker volume prune -f
 	sudo rm -rf /home/$(USERNAME)/data
 
+fclean: clean
+	docker system prune -af --volumes
+
 re: clean all
 
 up:
