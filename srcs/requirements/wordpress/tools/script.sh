@@ -7,7 +7,6 @@ cd /var/www/html
 
 validate_username() {
     lower_username=`echo $1 | awk '{print tolower($0)}'`
-    echo $lower_username
 
     if [[ $lower_username == *admin* ]]; then
         echo "Error: Username cannot contain 'admin' or 'administrator'." >&2
@@ -47,6 +46,7 @@ if [ ! -f wp-config.php ]; then
     --allow-root
   wp user create "${wp_user}" "${wp_email}" --user_pass="${wp_pwd}" --role=author --allow-root
 
+  wp theme install twentytwentyfour  --activate --allow-root
 
   wp plugin install redis-cache --activate --allow-root
   wp config set WP_REDIS_HOST redis --allow-root
