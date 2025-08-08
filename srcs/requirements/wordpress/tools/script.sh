@@ -1,11 +1,31 @@
 #!/bin/bash
 
-  mkdir -p /run/php
-  chown www-data:www-data /run/php
+mkdir -p /run/php
+chown www-data:www-data /run/php
 
-  cd /var/www/html
+cd /var/www/html
+
+validate_username() {
+    lower_username=`echo $1 | awk '{print tolower($0)}'`
+    echo $lower_username
+
+    if [[ $lower_username == *admin* ]]; then
+        echo "Error: Username cannot contain 'admin' or 'administrator'." >&2
+        return 1 
+    fi
+    return 0  
+}
 
 if [ ! -f wp-config.php ]; then
+
+
+  if validate_username $admin_user ; then
+      echo "Username is valid!"
+  else
+      echo "Username is invalid!" >&2
+      exit 1
+  fi
+
   wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
   chmod +x wp-cli.phar
   mv wp-cli.phar /usr/local/bin/wp

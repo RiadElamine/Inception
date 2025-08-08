@@ -48,7 +48,7 @@ services:
     container_name: adminer
     hostname: adminer_host
     image: adminer:riad
-    build: ./requirements/adminer/.
+    build: ./requirements/bonus/adminer/.
     networks:
       - webnet
     ports:
@@ -60,17 +60,17 @@ services:
     container_name: my_website
     hostname: my_website_host
     image:  my_website:riad
-    build: ./requirements/my_website/.
+    build: ./requirements/bonus/my_website/.
     networks:
       - webnet
     ports:
-      - "80:80"
+      - "8000:80"
     restart: always
   redis:
     container_name: redis
     hostname: redis_host
     image: redis:riad
-    build: ./requirements/redis/.
+    build: ./requirements/bonus/redis/.
     networks:
       - webnet
     ports:
@@ -81,7 +81,7 @@ services:
   portainer:
     container_name: portainer
     hostname: portainer_host
-    build: ./requirements/portainer/.
+    build: ./requirements/bonus/portainer/.
     image: portainer:riad
     networks:
       - webnet
