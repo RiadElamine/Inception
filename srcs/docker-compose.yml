@@ -105,17 +105,17 @@ volumes:
     name: mariadb
     driver_opts:
       type: none
-      device: /home/${USER}/data/mariadb
+      device: /home/relamine/data/mariadb
       o: bind
   wordpress_data:
     name: wordpress
     driver_opts:
       type: none
-      device: /home/${USER}/data/wordpress
+      device: /home/relamine/data/wordpress
       o: bind
   portainer_data:
     name: portainer
     driver_opts:
       type: none
-      device: /home/${USER}/data/portainer
+      device: /home/relamine/data/portainer
       o: bind

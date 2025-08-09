@@ -7,6 +7,6 @@ RUN mkdir /etc/nginx/ssl && \
     -keyout /etc/nginx/ssl/nginx.key \
     -out /etc/nginx/ssl/nginx.crt \
     -subj "/C=MA/ST=Khouribga/L=Khouribga/O=42 School/OU=Inception/CN=relamine.42.fr"
-COPY ./conf/default /etc/nginx/sites-enabled/default
+COPY ./tools/default /etc/nginx/sites-enabled/default
 
 CMD [ "nginx", "-g", "daemon off;" ]

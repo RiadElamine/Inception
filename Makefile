@@ -1,11 +1,9 @@
 all: build
 
-USERNAME := $(shell logname)
-
 build:
-	mkdir -p /home/${USERNAME}/data/mariadb
-	mkdir -p /home/${USERNAME}/data/wordpress
-	mkdir -p /home/${USERNAME}/data/portainer
+	mkdir -p /home/relamine/data/mariadb
+	mkdir -p /home/relamine/data/wordpress
+	mkdir -p /home/relamine/data/portainer
 	cd srcs && docker compose up -d --build
 
 clean:
@@ -13,7 +11,7 @@ clean:
 	docker container prune -f
 	docker image prune -af
 	docker volume prune -f
-	sudo rm -rf /home/$(USERNAME)/data
+	sudo rm -rf /home/relamine/data
 
 fclean: clean
 	docker system prune -af --volumes
