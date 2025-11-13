@@ -25,8 +25,6 @@ services:
       - mariadb
     networks:
       - webnet
-    ports:
-      - "9000"
     volumes:
       - wordpress_data:/var/www/html
     restart: always
@@ -39,8 +37,6 @@ services:
       - .env
     networks:
       - webnet 
-    ports:
-      - "3306"
     volumes:
       - mariadb_data:/var/lib/mysql
     restart: always
